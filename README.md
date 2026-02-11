@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/sparky_big_dq.png" alt="Sparky - DGX Spark Community Mascot" width="300"/>
+</p>
+
 # DGX Spark Community Playbooks
 
 A community-driven collection of playbooks for NVIDIA DGX Spark devices with Blackwell architecture.

@@ -110,7 +110,7 @@ network:
   ethernets:
     enp1s0f1np1:
       addresses:
-        - 192.168.200.3/24
+        - 192.168.1.1/24
       mtu: 9000
       dhcp4: false
 ```
@@ -123,7 +123,7 @@ network:
   ethernets:
     enp1s0f1np1:
       addresses:
-        - 192.168.200.13/24
+        - 192.168.1.2/24
       mtu: 9000
       dhcp4: false
 ```
@@ -144,10 +144,10 @@ ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519
 Copy keys between nodes:
 ```bash
 # On Spark 1
-ssh-copy-id user@192.168.200.13
+ssh-copy-id user@192.168.1.1
 
 # On Spark 2
-ssh-copy-id user@192.168.200.3
+ssh-copy-id user@192.168.1.2
 ```
 
 ## Verification
@@ -170,8 +170,8 @@ ethtool enp1s0f1np1 | grep -i speed
 ### Test Connectivity
 
 ```bash
-ping 192.168.200.3   # from Spark 2
-ping 192.168.200.13  # from Spark 1
+ping 192.168.1.1   # from Spark 2
+ping 192.168.1.2  # from Spark 1
 ```
 
 ### RDMA Bandwidth Test
@@ -183,7 +183,7 @@ ib_send_bw -d rocep1s0f1 -b
 
 **Spark 2 (client):**
 ```bash
-ib_send_bw -d rocep1s0f1 -b 192.168.200.3
+ib_send_bw -d rocep1s0f1 -b 192.168.1.1
 ```
 
 **Expected result:** ~200 Gbps bidirectional (25,000+ MB/sec)

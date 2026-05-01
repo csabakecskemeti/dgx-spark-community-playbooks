@@ -1,0 +1,33 @@
+{
+  "timestamp": "2026-04-27T21:40:02Z",
+  "model": "Qwen/Qwen3-235B-A22B-GPTQ-Int4",
+  "container": "nvcr.io/nvidia/vllm:26.03-py3",
+  "config": {
+    "tensor_parallel_size": 2,
+    "gpu_memory_utilization": 0.7,
+    "max_model_len": 32768,
+    "enforce_eager": false
+  },
+  "benchmark": {
+    "input_len": 2048,
+    "output_len": 2000,
+    "num_prompts": 50,
+    "request_rate": 10
+  },
+  "results": {
+    "successful_requests": 50,
+    "failed_requests": 0,
+    "duration_seconds": 663.05,
+    "total_input_tokens": 102400,
+    "total_output_tokens": 100000,
+    "output_throughput_toks": 150.82,
+    "peak_throughput_toks": 200.0,
+    "total_throughput_toks": 305.26,
+    "ttft_mean_ms": 36210.09,
+    "ttft_median_ms": 34233.01,
+    "ttft_p99_ms": 73511.26,
+    "tpot_mean_ms": 310.17,
+    "tpot_median_ms": 311.30,
+    "tpot_p99_ms": 325.31
+  }
+}

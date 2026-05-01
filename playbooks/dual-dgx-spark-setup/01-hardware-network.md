@@ -22,7 +22,7 @@ Direct QSFP cable connection between the two Sparks (no switch required):
 
 ### IP Addressing Scheme
 
-Use a dedicated subnet for RDMA traffic (e.g., `192.168.200.0/24`):
+Use a dedicated subnet for RDMA traffic (e.g., `192.168.1.0/24`):
 
 | Device | RDMA Interface | IP Address |
 |--------|---------------|------------|

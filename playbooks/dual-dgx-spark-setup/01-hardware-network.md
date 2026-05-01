@@ -16,7 +16,7 @@ Direct QSFP cable connection between the two Sparks (no switch required):
 │  Spark 1    │                           │  Spark 2    │
 │             │                           │             │
 │ enp1s0f1np1 │◄──── 200Gbps QSFP ───────►│ enp1s0f1np1 │
-│ 192.168.X.3 │                           │ 192.168.X.13│
+│ 192.168.1.1 │                           │ 192.168.1.2 │
 └─────────────┘                           └─────────────┘
 ```
 
@@ -26,8 +26,8 @@ Use a dedicated subnet for RDMA traffic (e.g., `192.168.200.0/24`):
 
 | Device | RDMA Interface | IP Address |
 |--------|---------------|------------|
-| Spark 1 | enp1s0f1np1 | 192.168.200.3 |
-| Spark 2 | enp1s0f1np1 | 192.168.200.13 |
+| Spark 1 | enp1s0f1np1 | 192.168.1.1 |
+| Spark 2 | enp1s0f1np1 | 192.168.1.2 |
 
 **Tip:** Using a "+10 offset" pattern makes it easy to identify which Spark an IP belongs to.
 

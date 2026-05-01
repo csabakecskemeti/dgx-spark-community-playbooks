@@ -15,8 +15,8 @@ Key variables:
 ```bash
 SPARK1_HOST=spark1.local        # Hostname of head node
 SPARK2_HOST=spark2.local        # Hostname of worker node
-SPARK1_RDMA_IP=192.168.200.3    # RDMA IP of head node
-SPARK2_RDMA_IP=192.168.200.13   # RDMA IP of worker node
+SPARK1_RDMA_IP=192.168.1.1      # RDMA IP of head node
+SPARK2_RDMA_IP=192.168.1.2      # RDMA IP of worker node
 RDMA_INTERFACE=enp1s0f1np1      # RDMA network interface
 CONTAINER_NAME=vllm-spark       # Docker container name
 ```
@@ -172,10 +172,10 @@ if __name__ == "__main__":
 Run on both nodes simultaneously:
 ```bash
 # Spark 1
-docker exec $CONTAINER_NAME python test_nccl.py --rank 0 --master_addr 192.168.200.3
+docker exec $CONTAINER_NAME python test_nccl.py --rank 0 --master_addr 192.168.1.1
 
 # Spark 2
-docker exec $CONTAINER_NAME python test_nccl.py --rank 1 --master_addr 192.168.200.3
+docker exec $CONTAINER_NAME python test_nccl.py --rank 1 --master_addr 192.168.1.1
 ```
 
 ## Shutdown

@@ -23,6 +23,7 @@ This repository is a **community playbook collection** where DGX Spark enthusias
 
 | Playbook | Description |
 |----------|-------------|
+| [Dual DGX Spark Distributed Inference](playbooks/dual-dgx-spark-setup/) | Run 200B+ models across two DGX Sparks with 200Gbps RDMA, vLLM, and Claude Code automation |
 | [Heterogeneous Distributed Inference over RDMA](playbooks/heterogeneous-distributed-inference-rdma/) | Set up distributed inference between DGX Spark and a Linux workstation over 100Gbps RDMA/RoCE v2 |
 
 ## Contributing

@@ -44,7 +44,7 @@ ssh spark1.local "ip link show enp1s0f1np1"
 1. **Verify RDMA interface IP configuration:**
    ```bash
    ssh spark1.local "ip addr show enp1s0f1np1"
-   # Should show 192.168.200.X/24
+   # Should show 192.168.1.X/24
    ```
 
 2. **Check netplan configuration:**
@@ -54,7 +54,7 @@ ssh spark1.local "ip link show enp1s0f1np1"
 
 3. **Test connectivity:**
    ```bash
-   ssh spark1.local "ping -c 3 192.168.200.13"  # Ping Spark 2
+   ssh spark1.local "ping -c 3 192.168.1.2"  # Ping Spark 2
    ```
 
 4. **Reapply netplan if needed:**
@@ -97,7 +97,7 @@ ssh spark2.local "docker exec vllm-spark cat /tmp/ray/session_*/logs/raylet.out"
 
 1. **Verify head is reachable from worker:**
    ```bash
-   ssh spark2.local "docker exec vllm-spark python -c \"import socket; socket.create_connection(('192.168.200.3', 6379))\""
+   ssh spark2.local "docker exec vllm-spark python -c \"import socket; socket.create_connection(('192.168.1.1', 6379))\""
    ```
 
 2. **Check RAY_NODE_IP_ADDRESS is set:**
@@ -113,11 +113,11 @@ ssh spark2.local "docker exec vllm-spark cat /tmp/ray/session_*/logs/raylet.out"
 
    # Restart head
    ssh spark1.local "docker exec vllm-spark ray start --head \
-     --node-ip-address=192.168.200.3 --port=6379 --num-gpus=1"
+     --node-ip-address=192.168.1.1 --port=6379 --num-gpus=1"
 
    # Restart worker
    ssh spark2.local "docker exec vllm-spark ray start \
-     --address=192.168.200.3:6379 --node-ip-address=192.168.200.13 --num-gpus=1"
+     --address=192.168.1.1:6379 --node-ip-address=192.168.1.2 --num-gpus=1"
    ```
 
 ### Ray Object Store OOM

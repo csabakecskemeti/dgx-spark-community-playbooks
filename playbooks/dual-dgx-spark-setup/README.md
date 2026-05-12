@@ -45,18 +45,30 @@ Start Docker containers with proper RDMA/NCCL environment variables. See [02-doc
 
 ### 3. Run Inference
 Choose your framework:
-- **[vLLM](frameworks/vllm/)** - Production-ready, best GPTQ performance
+- **[vLLM (NGC Container)](frameworks/vllm/)** - Production-ready, best GPTQ performance (vLLM 0.17.1)
+- **[spark-vllm-docker](frameworks/spark-vllm-docker.md)** - Nightly vLLM builds for newer models (Qwen 3.6+)
 - **[SGLang](frameworks/sglang/)** - Coming soon
+
+### 4. Claude Code Integration (Optional)
+Use your local vLLM as inference backend for Claude Code:
+- **[LiteLLM Proxy Setup](frameworks/litellm-claude-code.md)** - Anthropic API compatibility layer
 
 ## Performance Results
 
+### NGC vLLM Container (26.03)
 | Model | Quantization | Throughput | TTFT | Status |
 |-------|--------------|------------|------|--------|
 | Qwen3-235B-A22B | GPTQ-Int4 | **150 tok/s** | 36s | Stable |
 | Qwen3-235B-A22B | AWQ | 141 tok/s | 35s | Stable |
 | Qwen3-235B-A22B | NVFP4 | 84 tok/s | 24s | Unstable |
 
-**Recommendation:** Use GPTQ-Int4 for production workloads on DGX Spark.
+### spark-vllm-docker (Nightly vLLM 0.20.x)
+| Model | Config | Throughput | TTFT | TPOT |
+|-------|--------|------------|------|------|
+| Qwen3.6-35B-A3B-FP8 | Single Spark | 214 tok/s | 2.5s | 91ms |
+| Qwen3.6-35B-A3B-FP8 | Dual Spark (TP=2) | **550 tok/s** | 4.2s | 87ms |
+
+**Recommendation:** Use GPTQ-Int4 for 235B models, FP8 for newer Qwen 3.6 models.
 
 ## Key Findings
 
@@ -74,14 +86,22 @@ Choose your framework:
 |----------|-------------|
 | [01-hardware-network.md](01-hardware-network.md) | RDMA setup, netplan, IP addressing |
 | [02-docker-ray-setup.md](02-docker-ray-setup.md) | Container commands, Ray cluster |
-| [frameworks/vllm/](frameworks/vllm/) | vLLM inference setup and benchmarks |
+| [frameworks/vllm/](frameworks/vllm/) | NGC vLLM container setup and benchmarks |
+| [frameworks/spark-vllm-docker.md](frameworks/spark-vllm-docker.md) | Nightly vLLM builds for newer models |
+| [frameworks/litellm-claude-code.md](frameworks/litellm-claude-code.md) | LiteLLM proxy for Claude Code |
 | [frameworks/sglang/](frameworks/sglang/) | SGLang setup (coming soon) |
 | [troubleshooting.md](troubleshooting.md) | Common issues and solutions |
 | [SETUP-NOTES-RAW.md](SETUP-NOTES-RAW.md) | Detailed working notes |
 
 ## Claude Code Integration
 
-This playbook includes Claude Code skills for automated control. See [frameworks/vllm/skills/](frameworks/vllm/skills/).
+This playbook includes:
+- **Claude Code skills** for automated control - see [frameworks/vllm/skills/](frameworks/vllm/skills/)
+- **LiteLLM proxy** for using local vLLM as Claude Code inference - see [frameworks/litellm-claude-code.md](frameworks/litellm-claude-code.md)
+
+## Related Tools
+
+- **[quasar-deck](https://github.com/csabakecskemeti/quasar-deck)** - Cluster monitoring utility for DGX Spark
 
 ## License
 

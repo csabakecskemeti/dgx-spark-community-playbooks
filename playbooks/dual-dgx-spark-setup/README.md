@@ -45,18 +45,25 @@ Start Docker containers with proper RDMA/NCCL environment variables. See [02-doc
 
 ### 3. Run Inference
 Choose your framework:
-- **[vLLM](frameworks/vllm/)** - Production-ready, best GPTQ performance
+- **[vLLM (NGC Container)](frameworks/vllm/)** - Production-ready, best GPTQ performance (vLLM 0.17.1)
 - **[SGLang](frameworks/sglang/)** - Coming soon
+
+### 4. Claude Code Integration (Optional)
+Use your local vLLM as inference backend for Claude Code:
+- **[Local Claude Code on DGX Spark](../local-claude-code-dgx-spark/)** - Complete setup with spark-vllm-docker + LiteLLM
 
 ## Performance Results
 
+### NGC vLLM Container (26.03)
 | Model | Quantization | Throughput | TTFT | Status |
 |-------|--------------|------------|------|--------|
 | Qwen3-235B-A22B | GPTQ-Int4 | **150 tok/s** | 36s | Stable |
 | Qwen3-235B-A22B | AWQ | 141 tok/s | 35s | Stable |
 | Qwen3-235B-A22B | NVFP4 | 84 tok/s | 24s | Unstable |
 
-**Recommendation:** Use GPTQ-Int4 for production workloads on DGX Spark.
+**Recommendation:** Use GPTQ-Int4 for 235B models.
+
+For newer models (Qwen 3.6+) with latest vLLM, see [Local Claude Code on DGX Spark](../local-claude-code-dgx-spark/).
 
 ## Key Findings
 
@@ -74,14 +81,21 @@ Choose your framework:
 |----------|-------------|
 | [01-hardware-network.md](01-hardware-network.md) | RDMA setup, netplan, IP addressing |
 | [02-docker-ray-setup.md](02-docker-ray-setup.md) | Container commands, Ray cluster |
-| [frameworks/vllm/](frameworks/vllm/) | vLLM inference setup and benchmarks |
+| [frameworks/vllm/](frameworks/vllm/) | NGC vLLM container setup and benchmarks |
 | [frameworks/sglang/](frameworks/sglang/) | SGLang setup (coming soon) |
 | [troubleshooting.md](troubleshooting.md) | Common issues and solutions |
 | [SETUP-NOTES-RAW.md](SETUP-NOTES-RAW.md) | Detailed working notes |
 
 ## Claude Code Integration
 
-This playbook includes Claude Code skills for automated control. See [frameworks/vllm/skills/](frameworks/vllm/skills/).
+See **[Local Claude Code on DGX Spark](../local-claude-code-dgx-spark/)** playbook for:
+- Latest vLLM builds via spark-vllm-docker
+- LiteLLM proxy for Anthropic API compatibility
+- Claude Code configuration
+
+## Related Tools
+
+- **[quasar-deck](https://github.com/csabakecskemeti/quasar-deck)** - Cluster monitoring utility for DGX Spark
 
 ## License
 

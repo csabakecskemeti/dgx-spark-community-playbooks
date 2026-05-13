@@ -118,6 +118,14 @@ Using the `claude-*` wildcard route enables Claude Code's automatic context comp
 
 **Recommendation:** Use `claude --model claude-3-5-sonnet-20241022` to benefit from context compaction.
 
+## Tested Configuration
+
+Verified working with:
+- **Model:** Qwen/Qwen3.6-35B-A3B-FP8
+- **Recipe:** `qwen3.6-35b-a3b-fp8` (standard, not speculative decoding)
+- **Setup:** Dual DGX Spark (TP=2) with RDMA
+- **LiteLLM:** Installed via `uv tool install 'litellm[proxy]'`
+
 ## Switching Between Local and Anthropic
 
 ```bash
